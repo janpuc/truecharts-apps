@@ -1,0 +1,77 @@
+image:
+  repository: itzg/bungeecord
+  tag: 2022.3.0@sha256:57acb433bce9b7ba7b858c71b5ae45aa297a7d8cc54b600f66a664a15cbce887
+  pullPolicy: Always
+j17Image:
+  repository: itzg/bungeecord
+  tag: java17@sha256:694bb4a4551f548ee8e0ebe36e822015d3ced68b651a3d181ed778280795e0c4
+  pullPolicy: Always
+j11Image:
+  repository: itzg/bungeecord
+  tag: java11@sha256:d3ede5847ba34c78c3f9ef070bf2c2b6c3a01afafe8812b06b6f328235666a0e
+  pullPolicy: Always
+j8Image:
+  repository: itzg/bungeecord
+  tag: java8@sha256:026a087ea54f8fbd4c5d7c53e1d9aafd6f68b287570a91d17249be608c930743
+  pullPolicy: Always
+
+portal:
+  enabled: false
+
+securityContext:
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+
+secretEnv:
+  RCON_PASSWORD: "secretrconpass"
+
+env:
+  EULA: "TRUE"
+  OVERRIDE_SERVER_PROPERTIES: true
+  VERSION: "LATEST"
+  TYPE: "VANILLA"
+  DIFFICULTY: easy
+  MAX_PLAYERS: 20
+  MAX_WORLD_SIZE: 10000
+  ALLOW_NETHER: true
+  ANNOUNCE_PLAYER_ACHIEVEMENTS: true
+  ENABLE_COMMAND_BLOCK: false
+  FORCE_GAMEMODE: false
+  GENERATE_STRUCTURES: true
+  HARDCORE: false
+  MAX_BUILD_HEIGHT: 256
+  MAX_TICK_TIME: 60000
+  SPAWN_ANIMALS: true
+  SPAWN_MONSTERS: true
+  SPAWN_NPCS: true
+  VIEW_DISTANCE: 16
+  MODE: survival
+  MOTD: "Welcome to Minecraft on TrueNAS Scale!"
+  PVP: false
+  LEVEL_TYPE: DEFAULT
+  LEVEL: world
+  ONLINE_MODE: true
+  MEMORY: 2048M
+
+persistence:
+  data:
+    enabled: true
+    mountPath: "/data"
+
+service:
+  main:
+    ports:
+      main:
+        port: 25565
+        targetPort: 25565
+  rcon:
+    enabled: true
+    ports:
+      rcon:
+        enabled: true
+        port: 25575
+        targetPort: 25575
